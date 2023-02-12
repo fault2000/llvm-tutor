@@ -1,4 +1,4 @@
-# THE LIST OF PLUGINS AND THE CORRESPONDING SOURCE FILES
+# 플러그인과 해당하는 소스 파일의 목록
 # ======================================================
 set(LLVM_TUTOR_PLUGINS
     StaticCallCounter
@@ -39,35 +39,33 @@ set(OpcodeCounter_SOURCES
 set(MergeBB_SOURCES
   MergeBB.cpp)
 
-# CONFIGURE THE PLUGIN LIBRARIES
+# 플러그인 라이브러리 설정
 # ==============================
 foreach( plugin ${LLVM_TUTOR_PLUGINS} )
-    # Create a library corresponding to 'plugin'
+    # 'plugin'과 상응하는 라이브러리 생성
     add_library(
       ${plugin}
       SHARED
       ${${plugin}_SOURCES}
       )
 
-    # Configure include directories for 'plugin'
+    # 'plugin'을 위한 include 디렉토리 설정
     target_include_directories(
       ${plugin}
       PRIVATE
       "${CMAKE_CURRENT_SOURCE_DIR}/../include"
     )
 
-    # On Darwin (unlike on Linux), undefined symbols in shared objects are not
-    # allowed at the end of the link-edit. The plugins defined here:
-    #  - _are_ shared objects
-    #  - reference symbols from LLVM shared libraries, i.e. symbols which are
-    #    undefined until those shared objects are loaded in memory (and hence
-    #    _undefined_ during static linking)
-    # The build will fail with errors like this:
+    # Darwin에선(Linux와 달리), 공유 객체 내의 정의되지 않은 심볼은 link-edit 끝에서 허락되지 않는다.
+    # 플러그인은 여기서 정의된다:
+    #  - _are_ 공유 객체
+    #  - LLVM 공유 객체로부터 심볼 참조, 즉 이러한 공유 객체가 메모리에 로드될 때까지 정의되지 않는 심볼
+    #    (그리고 따라서 정적 링킹 동안 _undefined_)
+    # 빌드는 다음과 같은 에러와 함께 실패할 것이다:
     #    "Undefined symbols for architecture x86_64"
-    # with various LLVM symbols being undefined. Since those symbols are later
-    # loaded and resolved at runtime, these errors are false positives.
-    # This behaviour can be modified via the '-undefined' OS X linker flag as
-    # follows.
+    # 여러 LLVM 심볼들이 정의되지 않았다. 이러한 심볼들이 나중에 로드되고 런타임 때 해결되기에,
+    # 이러한 오류들은 false positive이다.
+    # 이 행동은 다음과 같이 '-undefined' OS X 링커를 통해 수정될 수 있다.
     target_link_libraries(
       ${plugin}
       "$<$<PLATFORM_ID:Darwin>:-undefined dynamic_lookup>"
