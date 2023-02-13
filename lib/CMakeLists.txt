@@ -12,6 +12,7 @@ set(LLVM_TUTOR_PLUGINS
     DuplicateBB
     OpcodeCounter
     MergeBB
+    InsertExistFunc
     )
 
 set(StaticCallCounter_SOURCES
@@ -38,6 +39,8 @@ set(OpcodeCounter_SOURCES
   OpcodeCounter.cpp)
 set(MergeBB_SOURCES
   MergeBB.cpp)
+set(InsertExistFunc_SOURCES
+  InsertExistFunc.cpp)
 
 # 플러그인 라이브러리 설정
 # ==============================
