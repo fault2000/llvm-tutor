@@ -27,6 +27,8 @@
 #include "llvm/IR/Instruction.h"
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/Support/raw_ostream.h"
+#include "llvm/Passes/PassBuilder.h"
+#include "llvm/Passes/PassPlugin.h"
 
 #include "llvm/IR/IRBuilder.h"
 
@@ -39,6 +41,9 @@
 //-----------------------------------------------------------------------------
 
 using namespace llvm;
+
+static char ID;
+Function *monitor;
 
 bool InsertExistFunc::runOnModule(Module &M) {
     bool FindExistFunc = false;

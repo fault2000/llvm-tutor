@@ -184,7 +184,7 @@ $ lit <build_dir>/test
 | MBASub | 정수 sub 명령 모호하게 만듬(???) | 변형 |
 | MBAAdd | 8-bit 정수 add 명령 모호하게 만듬 | 변형 |
 | FindFCmpEq | 부동 소수점 등식 비교 찾기 | 분석 |
-|  | 직접 부동 소수점 등식 비교를 다른 비교로 변환 | 변형 |
+| ConvertFCmpEq | 직접 부동 소수점 등식 비교를 다른 비교로 변환 | 변형 |
 | RIV | 각 basic block이 접근가능한 integer 값 검색 | 분석 |
 | DuplicateBB | basic block 복제, RIV 분석 결과 필요 | CFG |
 | MergeBB | 복제된 basic block 병합 | CFG |

@@ -6,6 +6,7 @@ set(LLVM_TUTOR_PLUGINS
     FindFCmpEq
     ConvertFCmpEq
     InjectFuncCall
+    InsertExistFunc
     MBAAdd
     MBASub
     RIV
@@ -24,6 +25,8 @@ set(ConvertFCmpEq_SOURCES
   ConvertFCmpEq.cpp)
 set(InjectFuncCall_SOURCES
   InjectFuncCall.cpp)
+set(InsertExistFunc_SOURCES
+  InsertExistFunc.cpp)
 set(MBAAdd_SOURCES
   MBAAdd.cpp
   Ratio.cpp)
